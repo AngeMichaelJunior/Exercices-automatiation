@@ -1,0 +1,41 @@
+# =========================================================
+# Script : creation_structure_session.ps1
+# Objectif : Créer la structure de dossiers pour une session
+# Auteur : ---
+# =========================================================
+
+# Récupérer le chemin du dossier courant
+$cheminBase = Get-Location
+
+# Boucle pour les 15 semaines de la session
+ForEach ($n in 1..15) {
+
+    # Transformer le numéro de la semaine en format 2 chiffres (01, 02, ..., 15)
+    $numSemaine = $n.ToString("00")
+
+    # Nom du dossier principal de la semaine
+    $dossierSemaine = "Semaine$numSemaine"
+
+    # Construire le chemin complet du dossier de la semaine
+    $cheminSemaine = Join-Path $cheminBase $dossierSemaine
+
+    # Message de suivi
+    Write-Host "Création du dossier pour la semaine $numSemaine"
+
+    # Créer le dossier de la semaine
+    New-Item -ItemType Directory -Path $cheminSemaine -Force | Out-Null
+
+    # Créer les sous-dossiers Note_de_cours et Travaux
+    $cheminNotes   = Join-Path $cheminSemaine "Note_de_cours"
+    $cheminTravaux = Join-Path $cheminSemaine "Travaux"
+
+    New-Item -ItemType Directory -Path $cheminNotes -Force   | Out-Null
+    New-Item -ItemType Directory -Path $cheminTravaux -Force | Out-Null
+
+    # Créer le fichier note.md vide dans Note_de_cours
+    $fichierNote = Join-Path $cheminNotes "note.md"
+    New-Item -ItemType File -Path $fichierNote -Force | Out-Null
+}
+
+# Message final de confirmation
+Write-Host " La structure complète des 15 semaines a été créée avec succès."
