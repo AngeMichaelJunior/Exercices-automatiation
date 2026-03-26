@@ -1,5 +1,5 @@
 cls
-$etudiants = import-csv -Path 'S06\note.csv' -Header 'nom','note' -Delimiter ';'
+$etudiant = import-csv -Path 'S06\note.csv' -Header 'nom','note' -Delimiter ';'
 $topNote = 0
 
 foreach($etudiant in $csv){
@@ -8,7 +8,7 @@ foreach($etudiant in $csv){
     if($note -gt 80){
         $etudiantObj = [PSCustomObject]@{
         Nom = $etudiant.nom
-        note = $note
+        note = $note.note
         }
         Write-Output "Nom : $($etudiantObj.nom) -Note : $($etudiantObj.note)"
     }

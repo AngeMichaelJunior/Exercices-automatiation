@@ -22,3 +22,19 @@ foreach ($line in $csvFile) {
 
 #$csvFile | Export-Csv -Path $path -NoTypeInformation
 
+#-------------------------------------------------------------------------------------------------------------
+
+$csv = Import-csv -Path "C:\Users\2432816\info.csv" -Delimiter "," 
+foreach($line in $csv){
+
+$connection = Test-Connection -ComputerName $line.AdresseIP -Count 1 -Quiet
+
+if($connection){
+$dns = [System.Net.Dns]::GetHostEntry($line.AdresseIP)
+$line.NomServeur = $dns.HostName
+$line.StatutDernierCheck = "En ligne"
+}else{
+$line.NomServeur = "Inconnu"
+$line.StatutDernierCheck = "Injoignable"
+}
+}

@@ -1,9 +1,13 @@
+﻿
+cls
+$profileUser = Get-ChildItem -Path "C:\Users" -Directory
 
 
-#Récupérer la liste des profils locaux
-$profiles = Get-ChildItem -Path "C:\Users" -Directory
-#Afficher les profils locaux
-foreach ($profile in $profiles) {
-    Write-Output "nom de l'utilisateur : $profile | chemin du profil : $($profile.FullName)"
+foreach($i in $profileUser){
+$obj = [PSCustomObject]@{
+NomUtilisateur = $i.Name
+CheminProfil = $i.FullName
 }
+Write-Output $obj 
 
+}
