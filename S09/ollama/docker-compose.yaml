@@ -1,0 +1,43 @@
+# docker compose up --build -d
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - C:/opt/ollama/models:/root/.ollama
+    ports:
+      - "11434:11434"
+    deploy:
+      resources:
+       reservations:
+         devices:
+           - driver: nvidia
+             count: 1
+             capabilities: [gpu]
+    restart: unless-stopped
+
+# OLLAMA UI - optionnel
+#  open-webui:
+#    image: ghcr.io/open-webui/open-webui:main
+#    container_name: open-webui
+#    restart: unless-stopped
+#    ports:
+#      - "3000:8080"
+#    environment:
+#      - OLLAMA_BASE_URL=http://ollama:11434
+#    volumes:
+#      - ./open-webui_data:/app/data
+#    depends_on:
+#      - ollama
+
+  ollama-pull-model:
+    image: ollama/ollama:latest
+    container_name: ollama-setup
+    environment:
+      - OLLAMA_HOST=ollama:11434  # Indique au client de viser le conteneur 'ollama'
+    volumes:
+      - C:/opt/ollama/models:/root/.ollama
+    entrypoint: /bin/sh
+    command: -c "sleep 10 && ollama pull granite4:350m && ollama pull gemma4:e2b"
+    depends_on:
+      - ollama

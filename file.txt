@@ -1,0 +1,10 @@
+fichier txt
+relié à la Q01
+je recherche le motif erreur
+si fichier pas trouvé, retourne FILE NOT FOUND EXCEPT
+j'ai une 2e fois le mot erreur
+116
+556
+abc
+545
+545
