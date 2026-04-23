@@ -1,19 +1,21 @@
-#lire un fichier
+#écrire dans le fichier
+with open('S09/fichier.txt', 'w') as fichier:
+    fichier.write("Bonjour,\n")
+    fichier.write('je suis Ange Michael.\n')
+    fichier.write('j\'étudie au cegep Limoilou.\n')
+    fichier.write('j\'ai 21 ans.\n')
+
+#lire le fichier
 try:
-    with open('file.txt', 'r') as file:
-        content = file.read()
-        print(content)
+    with open('S09/fichier.txt', 'r') as fichier:
+        contenu = fichier.read()
+        print(contenu)   
 except FileNotFoundError:
     print("File not found")
 
-#lire le fihcier ligne par ligne
 
-try:
-    with open('file.txt', 'r') as file:
-       while True:
-           content = file.readline()
-           if not content:
-                break
-            print(content)
-except FileNotFoundError:
-    print("File not found")
+    
+
+
+
+
