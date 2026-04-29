@@ -12,7 +12,7 @@ def trouver_motif(chemin_fichier, motif):
         print("File not found")
     
 if __name__ == "__main__":
-    trouver_motif("file.txt", "erreur") 
+    trouver_motif("S10/file.log", "erreur") 
 
 
 #correction prof
@@ -29,5 +29,6 @@ def trouver_motif(chemin, motif):
     except FileNotFoundError:
         print("Le fichier n\'a pas été trouvé")
         
+        
 if __name__ == "__main__":
-    trouver_motif("file.txt", "545")
+    trouver_motif("S10/file.log", "545")

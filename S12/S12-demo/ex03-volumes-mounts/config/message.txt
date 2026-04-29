@@ -1,0 +1,2 @@
+Configuration exemple pour Ex03.
+Ce fichier pourrait être monté en lecture seule dans un conteneur.

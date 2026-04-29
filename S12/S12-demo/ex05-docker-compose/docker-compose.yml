@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  db:
+    image: busybox:latest
+    container_name: demo-db
+    command: /bin/sh -c "echo 'Démarrage du service db...' && tail -f /dev/null"
+    environment:
+      DB_NAME: demo_database
+      DB_USER: admin
+    volumes:
+      - db_data:/tmp
+    networks:
+      - demo-net
+
+  web:
+    image: nginx:1.27-alpine
+    container_name: demo-web
+    ports:
+      - "8095:80"
+    environment:
+      NGINX_HOST: localhost
+      NGINX_PORT: 80
+    depends_on:
+      - db
+    networks:
+      - demo-net
+
+volumes:
+  db_data:
+
+networks:
+  demo-net:
+    driver: bridge

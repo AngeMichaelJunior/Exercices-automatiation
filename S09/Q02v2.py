@@ -14,4 +14,4 @@ class Serveur:
         self.statut = "arrêté"
 
     def afficher_etat(self):
-        print(f'le serveur {self.nom} ,  avec l\'adresse IP {self.adresse_ip} est {self.statut}.')
+        print(f"Le serveur {self.nom} avec l'adresse IP {self.adresse_ip} est {self.statut}!")

@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  db:
+    image: busybox:latest
+    container_name: demo-test-db
+    command: /bin/sh -c "mkdir -p /data && echo 'test_data_value_42' > /data/testfile.txt && echo 'Données écrites en db' && sleep 10"
+    volumes:
+      - test_data:/data
+    networks:
+      - test-net
+    environment:
+      DB_INIT: "true"
+
+  test-runner:
+    image: alpine:latest
+    container_name: demo-test-runner
+    depends_on:
+      - db
+    volumes:
+      - test_data:/data
+      - ./scripts:/scripts
+    networks:
+      - test-net
+    entrypoint: /bin/sh
+    command: /scripts/validate.sh
+    environment:
+      TEST_MODE: "true"
+
+volumes:
+  test_data:
+
+networks:
+  test-net:
+    driver: bridge

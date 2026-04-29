@@ -7,5 +7,5 @@ def additionner(a:int,b:int) -> int:
     return somme
 help(additionner)
 
-#resultat = additionner(5, 7)
-#print(resultat)
+resultat = additionner(5, 7)
+print(resultat)

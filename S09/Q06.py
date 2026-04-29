@@ -1,8 +1,6 @@
 import argparse
 
-nombre = 0
-operation = ' '
-resultat = 0
+
 
 # création du parser qui va analyser les arguments du terminal
 parser = argparse.ArgumentParser() 
@@ -28,7 +26,7 @@ else:
     print("L'opération doit être de type double ou binaire")
     exit()
 
-print(resultat)
+print(f"Le résultat de l'opération {args.operation} sur le nombre {args.nombre} est : {resultat}")
 
 
 #exemples d'exécution : python S09/Q06.py 10 binaire
